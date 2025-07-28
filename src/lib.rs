@@ -1,14 +1,61 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
+use axum_core::{
+    body::Body,
+    extract::FromRequestParts,
+    response::{IntoResponse, Response},
+};
+use http::request::Parts;
+use reqwest::StatusCode;
+
+pub mod layer;
+
+#[derive(Debug, Clone, serde::Deserialize)]
+pub struct Claims {
+    pub sub: String,
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+impl<S: Sync> FromRequestParts<S> for Claims {
+    type Rejection = AuthenticationError;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    async fn from_request_parts(parts: &mut Parts, _state: &S) -> Result<Self, Self::Rejection> {
+        parts
+            .extensions
+            .get::<Claims>()
+            .cloned()
+            .ok_or(AuthenticationError::InvalidToken)
     }
 }
+
+#[derive(Debug, Clone)]
+pub enum AuthenticationError {
+    InvalidToken,
+    MissingToken,
+}
+
+impl std::fmt::Display for AuthenticationError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::InvalidToken => write!(f, "Invalid token"),
+            Self::MissingToken => write!(f, "Missing token"),
+        }
+    }
+}
+
+impl IntoResponse for AuthenticationError {
+    fn into_response(self) -> axum_core::response::Response {
+        let (status, message) = match self {
+            AuthenticationError::InvalidToken => {
+                (StatusCode::UNAUTHORIZED, "Invalid authorization token")
+            }
+            AuthenticationError::MissingToken => {
+                (StatusCode::UNAUTHORIZED, "Missing authorization token")
+            }
+        };
+
+        Response::builder()
+            .status(status)
+            .body(Body::from(message))
+            .unwrap_or_default()
+    }
+}
+
+impl std::error::Error for AuthenticationError {}
