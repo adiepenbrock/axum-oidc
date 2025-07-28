@@ -105,6 +105,7 @@ version = "0.1.0"
 dependencies = [
  "axum-core",
  "axum-extra",
+ "base64",
  "http",
  "jsonwebtoken",
  "reqwest",

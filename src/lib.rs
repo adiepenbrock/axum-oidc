@@ -8,7 +8,9 @@ use reqwest::StatusCode;
 
 pub mod layer;
 
-#[derive(Debug, Clone, serde::Deserialize)]
+pub use layer::{InMemoryCache, JwksCache};
+
+#[derive(Debug, Clone, serde::Deserialize, serde::Serialize)]
 pub struct Claims {
     pub sub: String,
 }
