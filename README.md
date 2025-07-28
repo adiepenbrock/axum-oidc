@@ -1,8 +1,8 @@
-# Axum OIDC
+# Axum OIDC Layer
 
-[![Crates.io](https://img.shields.io/crates/v/axum-oidc.svg)](https://crates.io/crates/axum-oidc)
-[![Documentation](https://docs.rs/axum-oidc/badge.svg)](https://docs.rs/axum-oidc)
-[![License](https://img.shields.io/crates/l/axum-oidc.svg)](LICENSE)
+[![Crates.io](https://img.shields.io/crates/v/axum-oidc-layer.svg)](https://crates.io/crates/axum-oidc-layer)
+[![Documentation](https://docs.rs/axum-oidc-layer/badge.svg)](https://docs.rs/axum-oidc-layer)
+[![License](https://img.shields.io/crates/l/axum-oidc-layer.svg)](LICENSE)
 
 A high-performance, configurable OIDC (OpenID Connect) authentication layer for [Axum](https://github.com/tokio-rs/axum) web applications. This crate provides JWT token validation with intelligent caching for optimal performance and supports pluggable cache backends.
 
@@ -25,7 +25,7 @@ Add to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-axum-oidc = "0.1"
+axum-oidc-layer = "0.1"
 axum = "0.8"
 tokio = { version = "1.0", features = ["full"] }
 ```
@@ -34,7 +34,7 @@ tokio = { version = "1.0", features = ["full"] }
 
 ```rust
 use axum::{routing::get, Router};
-use axum_oidc::{OidcAuthenticationLayer, AuthenticationConfigProvider, Claims};
+use axum_oidc_layer::{OidcAuthenticationLayer, AuthenticationConfigProvider, Claims};
 use std::time::Duration;
 
 #[derive(Clone)]
@@ -100,7 +100,7 @@ let layer = OidcAuthenticationLayer::<AppConfig, CustomClaims>::new(config);
 Implement your own cache (e.g., Redis):
 
 ```rust
-use axum_oidc::{JwksCache, OidcAuthenticationLayer};
+use axum_oidc_layer::{JwksCache, OidcAuthenticationLayer};
 use std::time::Duration;
 
 struct RedisCache {

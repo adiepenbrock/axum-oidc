@@ -15,7 +15,7 @@
 //! # Quick Start
 //!
 //! ```rust,ignore
-//! use axum_oidc::{OidcAuthenticationLayer, AuthenticationConfigProvider, Claims};
+//! use axum_oidc_layer::{OidcAuthenticationLayer, AuthenticationConfigProvider, Claims};
 //! use std::time::Duration;
 //!
 //! #[derive(Clone)]

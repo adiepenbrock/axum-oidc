@@ -1,7 +1,17 @@
 [package]
-name = "axum-oidc"
+name = "axum-oidc-layer"
 version = "0.1.0"
 edition = "2024"
+description = "A high-performance, configurable OIDC authentication layer for Axum web applications"
+license = "Apache-2.0"
+authors = ["Andreas Diepenbrock"]
+repository = "https://github.com/adiepenbrock/axum-oidc-layer"
+homepage = "https://github.com/adiepenbrock/axum-oidc-layer"
+documentation = "https://docs.rs/axum-oidc-layer"
+readme = "README.md"
+keywords = ["axum", "oidc", "jwt", "authentication", "middleware"]
+categories = ["web-programming", "authentication"]
+rust-version = "1.88.0"
 
 [dependencies]
 axum-core = "0.5.2"

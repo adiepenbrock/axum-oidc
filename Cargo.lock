@@ -100,7 +100,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "axum-oidc"
+name = "axum-oidc-layer"
 version = "0.1.0"
 dependencies = [
  "axum-core",

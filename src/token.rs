@@ -10,7 +10,7 @@ use crate::{config::DEFAULT_TOKEN_TTL, error::OidcError};
 /// Extracts Bearer token from the Authorization header.
 ///
 /// This function looks for the "Authorization" header and extracts the token
-/// from a "Bearer <token>" format. Returns an error if the header is missing
+/// from a "Bearer \<token\>" format. Returns an error if the header is missing
 /// or doesn't follow the expected format.
 pub fn extract_bearer_token(req: &Request) -> Result<String, OidcError> {
     req.headers()
